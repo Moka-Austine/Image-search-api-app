@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
+
+
+* {
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    background-color: rgb(247, 246, 243);
+    padding: 0;
+    margin: 0;
+    
+}
+
+
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+/*! =======================HEADER ============================================= */
+#App_header {
+ text-align: center;
+ font-size: 30px;
+ padding: 30px 0;
+ color: #000;
+}
+
+
+/* ! ==========================SEARCH FORM ===================================== */
+.app_search_form {
+    width: 100vw;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 40px;
+}
+
+.app_search_form input {
+    width: 400px;
+    padding: 10px 6px;
+    box-shadow: 0 0 5px #cacaca;
+    margin-right: 5px;
+}
+
+.app_search_form input, #submit_search_btn, #show_more_results {
+    font-size: 16px;
+    color: #000;
+    border-radius: 5px;
+    border: 0;
+}
+
+
+#submit_search_btn, #show_more_results {
+    padding: 5px 15px;
+    background-color: #3b8af1;
+}
+#submit_search_btn {
+    padding: 11px 17px;
+}
+
+#submit_search_btn:hover, #show_more_results:hover {
+    background-color: #1a5cb3;
+}
+
+/* !==================================THE SEARCH RESULTS ================================================ */
+
+#all_search_res_container {
+    padding: 30px;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.search_container {
+    border: 1px solid #cecece;
+    border-radius: 8px;
+    margin: 20px;
+    height: auto;
+    transition: 0.25s ease-in-out;
+}
+
+.search_container:hover {
+    opacity: .8;
+    scale: 1.01;
+}
+
+.image {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.image img {
+    width: 100%;
+    height: 100%;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+.search_container p {
+    font-size: 17px;
+    font-weight: 600;
+    padding: 10px 6px 5px 6px;
+    text-transform: capitalize;
+}
+
+
+
+/* !=========================SHOW MORE RESULTS BUTTON ======================================= */
+#show_more_results {
+    margin: 0px 100px;
+    display: none; 
+}
+#show_more_results:hover {
+   font-weight: 600;
+ 
+}
