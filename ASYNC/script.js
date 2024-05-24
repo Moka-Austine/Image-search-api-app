@@ -15,12 +15,18 @@ async function load_more_images () {
 
     // ! DYNAMIC URL========================================================================================================
     const url = `https://api.unsplash.com/search/photos?page=${page}&query=${search_data}&client_id=${access_key}`;
-    console.log(url)
+    try {
+        const response = await fetch(url);
 
-    const response = await fetch(url);
+        const data = await response.json();
+        const results = data.results;
+    }
 
-    const data = await response.json();
-    const results = data.results;
+    catch (error) {
+        console.error(error)
+    }
+
+    
 
 
     if ( page === 1 ) {
