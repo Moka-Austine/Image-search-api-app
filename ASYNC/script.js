@@ -17,8 +17,10 @@ async function load_more_images () {
     const url = `https://api.unsplash.com/search/photos?page=${page}&query=${search_data}&client_id=${access_key}`;
 
     // try-catch code blocks
+    
+    const response = await fetch(url);
+
     try {
-        const response = await fetch(url);
 
         const data = await response.json();
         const results = data.results;
