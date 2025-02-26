@@ -30,7 +30,7 @@ jobs:
     - name: Push Docker image to Docker Hub
       run: docker push ${{ secrets.DOCKER_USERNAME }}/${{ secrets.REPOSITORY_NAME }}
 
-    # Optionally, you can add a step to scan the image for vulnerabilities:
+    # A step to scan the image for vulnerabilities:
     - name: Scan Docker image for vulnerabilities (optional)
        uses: aquasecurity/trivy-action@v0.5.0
        with:
