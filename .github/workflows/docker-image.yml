@@ -32,6 +32,6 @@ jobs:
 
     # A step to scan the image for vulnerabilities:
     - name: Scan Docker image for vulnerabilities (optional)
-       uses: aquasecurity/trivy-action@v0.5.0
-       with:
-         image-ref: myusername/image-search-app:1.0.0
+      uses: aquasecurity/trivy-action@v0.5.0
+      with:
+        image-ref: myusername/image-search-app:1.0.0
