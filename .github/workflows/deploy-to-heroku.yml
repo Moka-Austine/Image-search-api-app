@@ -1,6 +1,6 @@
 name: Deploying Docker Image to Heroku
 
-on: 
+on:
   workflow_dispatch:
 
 jobs:
