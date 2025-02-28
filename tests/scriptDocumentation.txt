@@ -1,0 +1,21 @@
+Breakdown of the test:
+
+Mocking the fetch function:
+     We use jest.fn() to mock the fetch function. Then, we use mockResolvedValueOnce() to simulate a successful response with mock image data.
+
+First Test (Valid Response):
+
+     We simulate the load_more_images() function making a request to the Unsplash API and returning a mock array of images.
+We assert that fetch was called with the correct URL and that the function correctly returns the mocked image data.
+
+Second Test (Error Handling):
+
+     We test how the function behaves when the fetch call fails (e.g., due to network issues or an API error).
+In this case, we expect the load_more_images() function to throw an error.
+
+Mocking Strategies:
+     Mocking fetch: The fetch function is a global function, so we mock it directly using global.fetch = jest.fn().
+Mocking JSON Parsing: Since fetch() resolves with a response object, we also mock the .json() method using jest.fn().mockResolvedValueOnce() to simulate returning a specific JSON response.
+
+Conclusion:
+    By mocking the API call with jest.fn(), you ensure that your tests don’t actually make network requests, and you can test how the load_more_images function behaves with different API responses (success, failure, etc.).

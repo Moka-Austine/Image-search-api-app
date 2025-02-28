@@ -1,0 +1,14 @@
+{
+  "name": "image-search-api-app",
+  "version": "1.0.0",
+  "description": "a simple images search app",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "moka autine",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}

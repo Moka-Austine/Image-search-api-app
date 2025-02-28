@@ -7,7 +7,7 @@ const results_container = document.getElementById("all_search_res_container");
 let page = 1;
 let search_data = "";
 
-async function load_more_images () {
+export async function load_more_images () {
     search_data = input_text.querySelector("#input_text").value;
 
     const url = `https://api.unsplash.com/search/photos?page=${page}&query=${search_data}&client_id=${access_key}`;
