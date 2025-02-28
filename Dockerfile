@@ -5,7 +5,7 @@ FROM nginx:alpine
 RUN mkdir -p /home/app
 
 # Copy the frontend app's build files (e.g., from 'async' folder in your local machine) to the Nginx default HTML directory
-COPY ./ASYNC /usr/share/nginx/html
+COPY ./index.html /usr/share/nginx/html
 
 # Expose port 80 (default for nginx)
 EXPOSE 80
