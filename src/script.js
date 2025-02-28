@@ -7,7 +7,7 @@ const results_container = document.getElementById("all_search_res_container");
 let page = 1;
 let search_data = "";
 
-export async function load_more_images () {
+async function load_more_images () {
     search_data = input_text.querySelector("#input_text").value;
 
     const url = `https://api.unsplash.com/search/photos?page=${page}&query=${search_data}&client_id=${access_key}`;
@@ -74,6 +74,8 @@ input_text.addEventListener("submit", (event) => {
 show_more_results.addEventListener("click", () => {
     load_more_images();
 });
+
+module.exports = { load_more_images };
 
 
 // const access_key = "rztfLv4GiR-2HaGV0yLOQHE8KBc7N8JcTJE2KjvG7Ow";

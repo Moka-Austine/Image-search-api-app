@@ -1,4 +1,5 @@
-import { load_more_images } from '../src/script.js';
+//import { load_more_images } from '../src/script.js';
+const { load_more_images } = require('../src/script.js');
 
 // Mock the global fetch function
 global.fetch = jest.fn();
