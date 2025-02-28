@@ -49,10 +49,10 @@ jobs:
         with:
           api_key: ${{ secrets.HEROKU_API_KEY }}  # Heroku API Key from your Heroku account
 
-      #- name: Deploy to Heroku
-      #- uses: ./.github/workflows/docker-image.yml  # Reference the reusable workflow 
-       # run: |
-       #   heroku container:login
-       #   heroku container:push web --app image-search-app
-       #   heroku container:release web --app image-search-app
+      - name: Deploy to Heroku
+      - uses: ./.github/workflows/docker-image.yml  # Reference the reusable workflow 
+      - run: |
+          heroku container:login
+          heroku container:push web --app image-search-app
+          heroku container:release web --app image-search-app
   
