@@ -1,12 +1,7 @@
 name: Deploying Docker Image to Heroku
 
 on:
-  push:
-    branches: 
-      [ "main" ]
-  pull_request:
-    branches: 
-      [ "main" ]
+  workflow_dispatch:
 
 jobs:
   # Job 1: Build the Docker image and run tests
