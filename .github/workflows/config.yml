@@ -27,3 +27,5 @@ jobs:
       - name: Build and Deploy
         #run: npm run build  # This could be your build script if you have one, otherwise just use "npm start"
         run: npm start
+        env:
+          ACCESS_KEY: ${{ secrets.ACCESS_KEY }}

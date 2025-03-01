@@ -1,4 +1,4 @@
-const access_key = "rztfLv4GiR-2HaGV0yLOQHE8KBc7N8JcTJE2KjvG7Ow";
+import { access_key } from "./access_key";
 
 const input_text = document.querySelector("form");
 const show_more_results = document.getElementById("show_more_results");
