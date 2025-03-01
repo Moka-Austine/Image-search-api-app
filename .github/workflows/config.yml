@@ -25,4 +25,5 @@ jobs:
      #   run: npm test  # Run your test scripts (optional if you have tests)
 
       - name: Build and Deploy
-        run: npm run build  # This could be your build script if you have one, otherwise just use "npm start"
+        #run: npm run build  # This could be your build script if you have one, otherwise just use "npm start"
+        run: npm start
