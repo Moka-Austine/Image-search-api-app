@@ -3,16 +3,11 @@ const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Serve static files from multiple 'public' folders
-app.use(express.static(path.join(__dirname, "./src/access_key.js")));
-app.use(express.static(path.join(__dirname, "./src/script.js")));
-app.use(express.static(path.join(__dirname, "./src/styles.css")));
+// Serve static files from the 'src' folder (for JS and CSS)
+app.use(express.static(path.join(__dirname, 'src')));
 
-// images folder
-app.use(express.static(path.join(__dirname, "./images/bridge.jpg")));
-app.use(express.static(path.join(__dirname, "./src/house.jpeg")));
-app.use(express.static(path.join(__dirname, "./src/chair.jpeg")));
-
+// Serve static files from the 'images' folder (for images)
+app.use(express.static(path.join(__dirname, 'images')));
 
 // Serve index.html when the root route is requested
 app.get('/', (req, res) => {
