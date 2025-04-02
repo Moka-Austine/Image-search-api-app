@@ -1,0 +1,14 @@
+# Ignore unnecessary development-related files and directories
+.git/
+node_modules/
+tests/
+.github/
+
+# Ignore configuration files that aren't needed in the container
+Dockerfile
+.dockerignore
+.gitignore
+
+# Ignore specific project files that aren't necessary for production
+CNAME
+OUTLINE.txt

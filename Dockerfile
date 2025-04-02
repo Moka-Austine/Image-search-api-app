@@ -1,14 +1,18 @@
-# Use the official nginx image as the base image
-FROM nginx:alpine
+# Build Stage
+FROM node:16-alpine as builder
 
-# Create a directory inside the container where you will copy the files
-RUN mkdir -p /home/app
+WORKDIR /app
+COPY . .
+RUN npm install && npm run build
 
-# Copy the frontend app's build files (e.g., from 'async' folder in your local machine) to the Nginx default HTML directory
-COPY . /usr
+# Production Stage (Nginx)
+FROM nginx:alpine3.14
 
-# Expose port 80 (default for nginx)
+# Copy the build output to the Nginx container
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Expose port 80
 EXPOSE 80
 
-# Start nginx server (Nginx runs by default in the container)
+# Start nginx server
 CMD ["nginx", "-g", "daemon off;"]
