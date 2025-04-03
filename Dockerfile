@@ -6,7 +6,7 @@ COPY . .
 RUN npm install && npm run build
 
 # Production Stage (Nginx)
-FROM nginx:alpine3.14
+FROM nginx:alpine3.21
 
 # Copy the build output to the Nginx container
 COPY --from=builder /app/dist /usr/share/nginx/html
