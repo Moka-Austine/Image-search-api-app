@@ -1,0 +1,37 @@
+name: CI - Docker Security Scans
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Docker image
+        run: docker build -t my-app:latest .
+
+      ### 🛡️ Trivy Scan ###
+      - name: Trivy scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: my-app:latest
+          format: table
+          exit-code: 0  # Set to 1 to fail build on vulnerabilities
+
+      ### 🔐 Snyk Scan ###
+      - name: Snyk scan
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: my-app
+          args: --file=Dockerfile --severity-threshold=medium
