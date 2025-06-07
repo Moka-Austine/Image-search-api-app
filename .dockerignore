@@ -3,7 +3,6 @@
 node_modules/
 tests/
 .github/
-dist
 .github/
 
 # Ignore configuration files that aren't needed in the container
