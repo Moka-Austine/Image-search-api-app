@@ -1,8 +1,35 @@
 const webpack = require('webpack');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'production',
-  entry: './index.js',
+  entry: './src/script.js',  // ✅ Frontend entry
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+    clean: true, // Clean the dist folder before each build
+    publicPath: '/', // Ensure assets are served from the root
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+        ],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/images/[name][ext]',
+        },
+      },
+    ],
+  },
   resolve: {
     fallback: {
       "assert": require.resolve("assert/"),
@@ -25,6 +52,13 @@ module.exports = {
   plugins: [
     new webpack.ProvidePlugin({
       Buffer: ['buffer', 'Buffer'],
-    })
-  ]
+    }),
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      inject: 'body', // Inject scripts at the end of the body
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'styles.css',
+    }),
+  ],
 };

@@ -1,3 +1,4 @@
+import './styles.css'; // ✅ This triggers Webpack to process the CSS
 import { access_key } from "./access_key";
 
 document.addEventListener("DOMContentLoaded", () => {
