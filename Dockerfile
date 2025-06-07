@@ -13,7 +13,7 @@ COPY index.html .
 RUN npm run build
 
 # Final Stage: Only serve static files via Nginx (No Node, No Express)
-FROM nginx:stable-alpine
+FROM nginx:1.28.0-alpine3.21-slim
 
 # Copy static build output
 COPY --from=builder /app/dist /usr/share/nginx/html
