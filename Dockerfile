@@ -4,7 +4,12 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
-COPY . .
+# Copy only what's needed for build
+COPY src/ ./src/
+COPY public/ ./public/
+COPY webpack.config.js .
+COPY index.html .
+
 RUN npm run build
 
 # Final Stage: Only serve static files via Nginx (No Node, No Express)
