@@ -17,13 +17,13 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build Docker image
-        run: docker build -t my-app:latest .
+        run: docker build -t image-search-app:1.0 .
 
       ### 🛡️ Trivy Scan ###
       - name: Trivy scan
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: my-app:latest
+          image-ref: my-app
           format: table
           exit-code: 0  # Set to 1 to fail build on vulnerabilities
 
