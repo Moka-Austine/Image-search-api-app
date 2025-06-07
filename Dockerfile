@@ -17,6 +17,7 @@ FROM nginx:stable-alpine
 
 # Copy static build output
 COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/public/images /usr/share/nginx/html/images
 
 # Remove default config and optionally replace it
 RUN rm /etc/nginx/conf.d/default.conf
