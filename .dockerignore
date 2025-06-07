@@ -3,12 +3,19 @@
 node_modules/
 tests/
 .github/
+dist
+.github/
 
 # Ignore configuration files that aren't needed in the container
 Dockerfile
 .dockerignore
 .gitignore
+*.log
+*.yaml
+*.yml
 
 # Ignore specific project files that aren't necessary for production
 CNAME
 OUTLINE.txt
+
+
