@@ -1,4 +1,5 @@
-//import './src/styles.css';
+import './src/styles.css';
+
 const express = require('express');
 const path = require('path');
 const app = express();
@@ -6,6 +7,9 @@ const port = process.env.PORT || 3000;
 
 // Serve static files from the 'build' folder (for JS, CSS, and images)
 app.use(express.static(path.join(__dirname, 'dist')));
+
+// Serve images from public/images
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
 // Serve index.html when the root route is requested
 app.get('/', (req, res) => {
