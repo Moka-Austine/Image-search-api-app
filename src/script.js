@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const data = await response.json();
                 const results = data.results;
                 console.log(data);
+                
 
                 if (page === 1) {
                     results_container.textContent = "";
