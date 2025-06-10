@@ -1,7 +1,9 @@
-<!-- ci-cd-diagram -->
+# My Project
 
-```mermaid
-graph TD;
-    A[Commit] --> B[Build];
-    B --> C[Test];
-    C --> D[Deploy];
+<!-- auto-readme -->
+<!-- end-auto-readme -->
+
+## CI/CD Pipeline
+
+<!-- ci-cd-diagram -->
+<!-- end-ci-cd-diagram -->
