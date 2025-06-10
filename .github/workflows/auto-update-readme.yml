@@ -1,4 +1,4 @@
-name: Generate and Update README with CI/CD Diagram
+name: Preserve Manual README and Inject Auto Content
 
 on:
   push:
@@ -10,66 +10,53 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📥 Checkout repository
+      - name: 📥 Checkout repo
         uses: actions/checkout@v3
 
-      # Step 1: Installing readme-ai 
-      - name: 🧠 Install readme-ai
+      # Optional: Generate AI content using a basic action (no API key needed)
+      - name: ✨ Generate README section (static placeholder)
         run: |
-          npm install -g readme-ai
+          cat <<EOF > auto_readme_section.md
+          ## Features
 
-       # Step 1: Generating README
-      - name: 📄 Generate README using readme-ai
-        run: |
-          readme-ai generate --output README.md
+          - Automated CI/CD
+          - Mermaid.js visualizations
+          - Auto-updating documentation
+          EOF
 
-      # Step 2 (OPTION A): Insert Mermaid diagram into a placeholder
-      - name: 🔧 Insert Mermaid CI/CD diagram into README
+      - name: 📊 Create Mermaid CI/CD Diagram
         run: |
-          DIAGRAM='```mermaid
+          cat <<EOF > cicd_diagram.md
+          \`\`\`mermaid
           graph TD;
-              A[Commit] --> B[Build];
-              B --> C[Test];
-              C --> D[Deploy];
-          ```'
+              A[Commit] --> B[Build]
+              B --> C[Test]
+              C --> D[Deploy]
+          \`\`\`
+          EOF
 
-          awk -v diagram="$DIAGRAM" '
-          BEGIN {in_block=0}
-          {
-            if ($0 ~ /<!-- ci-cd-diagram -->/) {
-              print $0;
-              print diagram;
-              in_block=1;
-              next;
-            }
-            if (in_block && $0 ~ /```/) {
-              in_block=0;
-              next;
-            }
-            if (!in_block) print $0;
-          }' README.md > temp.md && mv temp.md README.md
-
-      # Step 3 (OPTION B - OPTIONAL): Render to SVG and embed
-      - name: 🖼️ Install mermaid CLI and render SVG
+      - name: 🧠 Inject content into README.md
         run: |
-          npm install -g @mermaid-js/mermaid-cli
-          echo 'graph TD;
-            A[Commit] --> B[Build];
-            B --> C[Test];
-            C --> D[Deploy];' > diagram.mmd
-          mmdc -i diagram.mmd -o diagram.svg
+          # Replace auto-readme section
+          awk '
+            BEGIN {in=0}
+            /<!-- auto-readme -->/ {print; while ((getline line < "auto_readme_section.md") > 0) print line; in=1; next}
+            /<!-- end-auto-readme -->/ {in=0}
+            !in
+          ' README.md > tmp && mv tmp README.md
 
-      - name: 📎 Embed rendered image into README
-        run: |
-          if ! grep -q "![CI/CD Diagram](diagram.svg)" README.md; then
-            echo -e "\n![CI/CD Diagram](diagram.svg)" >> README.md
-          fi
+          # Replace CI/CD diagram section
+          awk '
+            BEGIN {in=0}
+            /<!-- ci-cd-diagram -->/ {print; while ((getline line < "cicd_diagram.md") > 0) print line; in=1; next}
+            /<!-- end-ci-cd-diagram -->/ {in=0}
+            !in
+          ' README.md > tmp && mv tmp README.md
 
-      # Step 4: Commit changes (if any)
-      - name: 🚀 Commit and push
+      - name: 🚀 Commit and Push if Changed
         run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'actions@github.com'
-          git add README.md diagram.svg || true
-          git diff --cached --quiet || git commit -m "Auto-update README with CI/CD diagram"
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add README.md
+          git diff --cached --quiet || git commit -m "🔄 Update dynamic README sections"
           git push
