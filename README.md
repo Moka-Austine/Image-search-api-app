@@ -1,5 +1,1 @@
-```mermaid
-graph TD;
-    A[Commit] --> B[Build];
-    B --> C[Test];
-    C --> D[Deploy];
+<!-- ci-cd-diagram -->
