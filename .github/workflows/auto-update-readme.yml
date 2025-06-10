@@ -38,20 +38,35 @@ jobs:
       - name: 🧠 Inject content into README.md
         run: |
           # Replace auto-readme section
-          awk '
-            BEGIN {in=0}
-            /<!-- auto-readme -->/ {print; while ((getline line < "auto_readme_section.md") > 0) print line; in=1; next}
-            /<!-- end-auto-readme -->/ {in=0}
-            !in
-          ' README.md > tmp && mv tmp README.md
-
+          awk '/<!-- auto-readme -->/ {
+            print;
+            while ((getline line < "auto_readme_section.md") > 0)
+              print line;
+            skip=1;
+            next
+          }
+          /<!-- end-auto-readme -->/ {
+            skip=0;
+            print;
+            next
+          }
+          !skip' README.md > tmp && mv tmp README.md
+      
           # Replace CI/CD diagram section
-          awk '
-            BEGIN {in=0}
-            /<!-- ci-cd-diagram -->/ {print; while ((getline line < "cicd_diagram.md") > 0) print line; in=1; next}
-            /<!-- end-ci-cd-diagram -->/ {in=0}
-            !in
-          ' README.md > tmp && mv tmp README.md
+          awk '/<!-- ci-cd-diagram -->/ {
+            print;
+            while ((getline line < "cicd_diagram.md") > 0)
+              print line;
+            skip=1;
+            next
+          }
+          /<!-- end-ci-cd-diagram -->/ {
+            skip=0;
+            print;
+            next
+          }
+          !skip' README.md > tmp && mv tmp README.md
+
 
       - name: 🚀 Commit and Push if Changed
         run: |
