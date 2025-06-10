@@ -13,14 +13,12 @@ jobs:
       - name: 📥 Checkout repository
         uses: actions/checkout@v3
 
-      # Step 1: Installing Python + readme-ai
-      - name: 🧠 Install Python + readme-ai
+      # Step 1: Installing readme-ai 
+      - name: 🧠 Install readme-ai
         run: |
-          python3 --version || sudo apt-get update && sudo apt-get install python3 -y
-          python3 -m pip install --upgrade pip
-          pip install readme-ai
-          
-      # Step 2: Generate base README 
+          npm install -g readme-ai
+
+       # Step 1: Generating README
       - name: 📄 Generate README using readme-ai
         run: |
           readme-ai generate --output README.md
