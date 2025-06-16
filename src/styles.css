@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap');
 
 
-* {
+html{
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
     background-color: rgb(247, 246, 243);
@@ -12,12 +12,79 @@
 
 
 
-main {
+/* main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
+} */
 
+/*! ======================= LOADER ============================================= */
+
+        /* From Uiverse.io by barisdogansutcu */ 
+    svg {
+    width: 3.25em;
+    transform-origin: center;
+    animation: rotate4 2s linear infinite;
+    }
+
+    circle {
+    fill: none;
+    stroke: hsl(214, 97%, 59%);
+    stroke-width: 2;
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    animation: dash4 1.5s ease-in-out infinite;
+    }
+
+    @keyframes rotate4 {
+    100% {
+    transform: rotate(360deg);
+    }
+    }
+
+    @keyframes dash4 {
+    0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    }
+
+    50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+    }
+
+    100% {
+    stroke-dashoffset: -125px;
+    }
+    }
+
+    /* Optional: center the loader on the page */
+    #loader {
+        position: fixed;        
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+    }
+
+    /* Hide loader by default */
+    .hidden {
+    display: none;
+    }
+
+/*! =======================NO RESULTS TO SHOW ERROR MESSAGE ============================================= */
+    .no-results-message,
+    .error-message {
+    text-align: center;
+    font-size: 1.2em;
+    color: #555;
+    margin-top: 1em;
+    }
+
+    .error-message {
+    color: red;
+    }
 
 /*! =======================HEADER ============================================= */
 #App_header  {
@@ -145,9 +212,16 @@ font-size: 12px;
 
 
 /* !=========================SHOW MORE RESULTS BUTTON ======================================= */
+#load_more_button{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 #show_more_results {
-    margin: 0px 100px;
+    margin: 0px 50px;
     display: none; 
+    width: 50%;
 }
 #show_more_results:hover {
    font-weight: 600;
@@ -310,22 +384,11 @@ font-size: 12px;
         height: 112.5px;
     }
 
-    search_container p {
+    .search_container p {
     font-size: 15px;
     }
 }
 
-@media screen and (max-width: 379px) {
-    
-    .search_container, .image {
-        width: 150px;
-        height: 112.5px;
-    }
-
-    search_container p {
-    font-size: 15px;
-    }
-}
 
 @media screen and (max-width: 358px) {
     
