@@ -32,10 +32,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (noResults) {
                     hideLoader();
                     const noResultsMessage = document.createElement("p");
-                    noResultsMessage.textContent = "No results found.";
+                    noResultsMessage.textContent = "No results found, search for something else.";
                     noResultsMessage.classList.add("no-results-message");
                     results_container.appendChild(noResultsMessage);
                     searchBtn.disabled = false;
+                    show_more_results.style.display = "none";
                     return; // Stop further execution
                 }
 
@@ -83,6 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     errorMsg.classList.add("error-message");
                     results_container.appendChild(errorMsg);
                     searchBtn.disabled = false;
+                    last_search_term = ""
 
                     // Optionally: keep loader visible or retry logic
                     console.error(error);
@@ -104,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
             searchBtn.disabled = true;
             page = 1;
+            show_more_results.style.display = "none";
 
             const inputField = form.querySelector("#input_text");
             const inputValue = inputField.value.trim();
@@ -121,6 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 hideLoader();
                 searchBtn.disabled = false;
                 alert("Please update search input to search again.");
+                last_search_term = ""
                 return;
             } 
             
@@ -138,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         show_more_results.addEventListener("click", async () => {
             showLoader();
-            load_more_images();
+            await load_more_images();
         });
 
 });
