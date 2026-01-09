@@ -1,7 +1,8 @@
 # My Project
 
+-Searches images from unsplash.com API.
 -Project is live on render.com with https://image-search-app-1-0.onrender.com/ address.
--
+
 
 <!-- auto-readme -->
 <!-- end-auto-readme -->
