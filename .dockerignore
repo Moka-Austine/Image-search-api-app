@@ -4,6 +4,8 @@ node_modules/
 tests/
 .github/
 .github/
+.env/
+.vscode/
 
 # Ignore configuration files that aren't needed in the container
 Dockerfile
