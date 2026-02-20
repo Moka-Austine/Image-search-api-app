@@ -52,11 +52,11 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/image-search-app:2.0 
+          docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/image-search-app:3.0 
 
       - name: Push Docker image to Docker Hub
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/image-search-app:2.0
+          docker push ${{ secrets.DOCKER_USERNAME }}/image-search-app:3.0
 
       
 
