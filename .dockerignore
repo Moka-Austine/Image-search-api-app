@@ -3,7 +3,6 @@
 node_modules/
 tests/
 .github/
-.github/
 .env/
 .vscode/
 
@@ -18,5 +17,4 @@ Dockerfile
 # Ignore specific project files that aren't necessary for production
 CNAME
 OUTLINE.txt
-
-
+*.md
