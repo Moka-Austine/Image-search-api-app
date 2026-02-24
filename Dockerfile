@@ -5,9 +5,9 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 # Copy only what's needed for build
-COPY src/ ./src/
 COPY public/ ./public/
 COPY webpack.config.js .
+COPY src/ ./src/
 COPY index.html .
 
 RUN npm run build
