@@ -7,7 +7,7 @@
 
 ## CI/CD Pipeline
 
--Builds docker image and automatically pushes to docker.com where its manually pulled on render for release to public.
+-Builds docker image and automatically pushes to docker.com where its manually pulled on render link image-search-app-1-0.onrender.com for release to public.
 
 <!-- ci-cd-diagram -->
 <!-- end-ci-cd-diagram -->
