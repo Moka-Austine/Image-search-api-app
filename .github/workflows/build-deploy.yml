@@ -1,0 +1,89 @@
+name: Building app to deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  #11111111111111111111111111111111111111111111111111111111111111111111111111111111
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 'v20.18.1'  # Specify the Node.js version to use
+
+      - name: Install dependencies
+        run: npm install  # Installs your app dependencies
+
+     # - name: Run tests
+     #   run: npm test  # Run your test scripts (optional if you have tests)
+
+      - name: Build
+        #run: npm run build  # This could be your build script if you have one, otherwise just use "npm start"
+        run: npm run build
+        
+  #22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222
+  push-to-docker:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Run tests
+        run: |
+          # Here you can add your testing scripts/commands, for example:
+          # npm test
+          echo "Running tests... (Replace with actual test commands)"  
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker image
+        run: |
+          docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/image-search-app:3.0 
+
+      - name: Push Docker image to Docker Hub
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/image-search-app:3.0
+
+      
+
+  # 333333333333333333333333333333333333333333333333333333333333333333333333333333333333333
+  #deploying_to_Heroku:
+  #  runs-on: ubuntu-latest
+  #  needs:   push-to-docker
+   # steps:
+   #   - name: Checkout code
+  #      uses: actions/checkout@v2
+
+   #   - name: Log in to Docker Hub
+  #      uses: docker/login-action@v2
+  #      with:
+  #        username: ${{ secrets.DOCKER_USERNAME }}
+  #        password: ${{ secrets.DOCKER_PASSWORD }}
+
+   #   - name: Log in to Heroku
+   #     uses: akshnz/heroku-deploy@v1.0.0
+   #     with:
+   #       api_key: ${{ secrets.HEROKU_ACCESS_KEY }}
+
+   #   - name: Deploy to Heroku
+   #     run: |
+   #       heroku container:login
+   #       heroku container:push web --app image-search-app
+   #       heroku container:release web --app image-search-app
+  
+
+

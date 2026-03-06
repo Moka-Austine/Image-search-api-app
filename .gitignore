@@ -1,0 +1,5 @@
+node_modules/        # Ignore the entire node_modules directory
+dist/                # Ignore the entire dist directory
+build/               # Ignore the entire build directory
+.env/
+.vscode/
