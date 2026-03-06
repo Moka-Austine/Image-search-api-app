@@ -3,3 +3,4 @@ dist/                # Ignore the entire dist directory
 build/               # Ignore the entire build directory
 .env/
 .vscode/
+.idea/
