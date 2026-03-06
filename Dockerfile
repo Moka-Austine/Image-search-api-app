@@ -1,39 +1,48 @@
-# Build Stage (Node image to run Webpack)
+# Build Stage: Node + Webpack
 FROM node:18-alpine AS builder
 
 WORKDIR /app
+
+# Install dependencies
 COPY package*.json ./
 RUN npm ci
-# Copy only what's needed for build
-COPY public/ ./public/
+
+# Copy source files needed for build
 COPY webpack.config.js .
+COPY public/ ./public/
 COPY src/ ./src/
 COPY index.html .
 
+# Build production assets
 RUN npm run build
 
-# Final Stage: Only serve static files via Nginx (No Node, No Express)
+# Final Stage: Nginx (non-root)
 FROM nginx:1.29-alpine-slim
 
-# Create a non-root user and group
+# Create non-root user and group
 RUN addgroup -S appgroup \
-&& adduser -S appuser -G appgroup
+    && adduser -S appuser -G appgroup \
+    # Remove default Nginx config
+    && rm /etc/nginx/conf.d/default.conf
 
-# Remove default config
-RUN rm /etc/nginx/conf.d/default.conf
-
-# Copy static build output
+# Copy static build output from builder
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY --from=builder /app/public/images /usr/share/nginx/html/images
-# Optional: Add custom Nginx config for SPA (e.g. route fallback to index.html)
-COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Change ownership so non-root can read files
-RUN chown -R appuser:appgroup /usr/share/nginx/html \
-&& chown -R appuser:appgroup /var/cache/nginx \
-&& chown -R appuser:appgroup /var/run
+# Copy custom nginx.conf (SPA-friendly)
+COPY nginx.conf /etc/nginx/conf.d/default.conf 
+COPY nginx-main.conf /etc/nginx/nginx.conf
+
+# Create writable directories for Nginx runtime (WSL2-safe)
+RUN mkdir -p /run/nginx \
+    && chown -R appuser:appgroup /run/nginx \
+    && chown -R appuser:appgroup /var/cache/nginx \
+    && chown -R appuser:appgroup /usr/share/nginx/html
+
 # Switch to non-root user
 USER appuser
 
-EXPOSE 80
+EXPOSE 8080
+
+# Start Nginx in foreground
 CMD ["nginx", "-g", "daemon off;"]
