@@ -4,3 +4,4 @@ build/               # Ignore the entire build directory
 .env/
 .vscode/
 .idea/
+CICDimg/
