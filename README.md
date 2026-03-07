@@ -1,21 +1,22 @@
-# My Project 🏅
+# API image search App 🏅
 
 -Fetches images and description from unsplash.com API and displays them in cards. 
--Project is live free hosted on onrender.com with address https://image-search-app-1-0.onrender.com/ 
+
+-Project is live free hosted on onrender.com with address [https://image-search-app-1-0.onrender.com/](https://image-search-app-1-0.onrender.com/)
 
 ## System requirements
 
 -For successful usage of this project, the system requirements are:
 
 1. **Nodejs**:
- - Go to [Click here](https://nodejs.org/en/download) to download and choose for your operating system.
+ - Go to [https://nodejs.org/en/download](https://nodejs.org/en/download) to download and choose for your operating system.
 
 2. **Docker**:
- - For Windows download make sure you have enabled WSL (Windows Subsystem for Linux) or Hyper-V. To download [Click here](https://docs.docker.com/desktop/setup/install/windows-install/)
+ - For Windows download make sure you have enabled WSL (Windows Subsystem for Linux) or Hyper-V. To download [https://docs.docker.com/desktop/setup/install/windows-install/](https://docs.docker.com/desktop/setup/install/windows-install/)
 
- - For Mac, Docker stoped supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases). And have at least 4GB RAM. Read documentation for more information here before download [lick here](https://docs.docker.com/desktop/setup/install/mac-install/)
+ - For Mac, Docker stoped supporting the oldest version and supports the newest version of macOS (in addition to the previous two releases). And have at least 4GB RAM. Read documentation for more information here before download [https://docs.docker.com/desktop/setup/install/mac-install/](https://docs.docker.com/desktop/setup/install/mac-install/)
 
-  - For Linux download, read the documentation before download for different distributions on [Click here](https://docs.docker.com/desktop/setup/install/linux/)
+  - For Linux download, read the documentation before download for different distributions on [https://docs.docker.com/desktop/setup/install/linux/](https://docs.docker.com/desktop/setup/install/linux/)
 
 ### To run the App
  - To build the docker image:
@@ -24,12 +25,15 @@
    ```
 
 - To run the docker image as a container and access it on localhost 8080 on the brouser:
-   ```docker run -d -p 8080:8080  myapp                                                                       
-   ```
 
+  **NOTE:** *If port 8080 is already in use in your computer, then use 8081:8080 or another port on the docker run command to access port container 8080 on the brouser*
+   ```
+   docker run -d -p 8080:8080  myapp                                                                       
+   ```
+   
 ## CI/CD Pipeline
 
--Builds docker image and automatically pushes to docker.com where it is manually pulled on render.com  [Click here](image-search-app-1-0.onrender.com) for release to public.
+- GitHub Actions builds docker image and automatically pushes to docker.com where it is manually pulled on render.com  [image-search-app-1-0.onrender.com](image-search-app-1-0.onrender.com) for release to public.
 
 <!-- ci-cd-diagram -->
 ![CI/CD pipeline](CICDimg/ci_cd.drawio.png)
@@ -70,3 +74,9 @@
 17. url: ^0.11.4
 18. util: ^0.12.5
 19. webpack-cli: ^6.0.1
+
+
+
+*Author: Moka Austine*
+
+DevOps Engineer♾️
