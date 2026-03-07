@@ -33,7 +33,7 @@
    
 ## CI/CD Pipeline
 
-- GitHub Actions builds docker image and automatically pushes to docker.com where it is manually pulled on render.com  [image-search-app-1-0.onrender.com](image-search-app-1-0.onrender.com) for release to public.
+- GitHub Actions builds docker image and automatically pushes to docker.com where it is manually pulled on render.com  [https://image-search-app-1-0.onrender.com/](https://image-search-app-1-0.onrender.com/) for release to public.
 
 <!-- ci-cd-diagram -->
 ![CI/CD pipeline](CICDimg/ci_cd.drawio.png)
